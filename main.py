@@ -57,7 +57,7 @@ with col1:
 with col2:
     st.image(rag_image, use_column_width=True)
 
-if os.getenv('OPENAI_API_KEY') is None:
+if os.getenv('OPENAI_API_KEY') is not None:
     show_pages(
         [
             Page("./main.py", "Home", "🏠"),
