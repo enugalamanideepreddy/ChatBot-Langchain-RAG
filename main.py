@@ -18,7 +18,7 @@ def check_openai_api_key(api_key):
 
 if os.getenv('OPENAI_API_KEY') is None and 'api' not in st.session_state:
     user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed',type='password')
-    if len(user_input) > 10:
+    if len(user_input) > 15:
         st.session_state.api = user_input
         st.rerun()
     is_valid = check_openai_api_key(os.getenv('OPENAI_API_KEY'))
@@ -62,7 +62,7 @@ with col1:
 with col2:
     st.image(rag_image, use_column_width=True)
 
-if os.getenv('OPENAI_API_KEY') is not None:
+if 'api' not in st.session_state:
     show_pages(
         [
             Page("./main.py", "Home", "🏠"),
