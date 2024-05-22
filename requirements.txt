@@ -2,8 +2,7 @@ langchain
 langchain-openai
 langchain_community
 streamlit
-langserve
-pypdf
+PyPDF2
 chromadb
 streamlit-chat
 st-pages
