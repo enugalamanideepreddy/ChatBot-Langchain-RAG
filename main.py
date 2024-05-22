@@ -16,7 +16,7 @@ def check_openai_api_key(api_key):
         return False
     return True
 
-if os.getenv('OPENAI_API_KEY') is None:
+if os.getenv('OPENAI_API_KEY') is None and 'api' not in st.session_state:
     user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed',type='password')
     if len(user_input) > 10:
         st.session_state.api = user_input
