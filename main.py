@@ -7,8 +7,6 @@ from PIL import Image
 import requests
 from io import BytesIO
 
-import os
-
 def check_openai_api_key(api_key):
     try:
         x = ChatOpenAI(api_key=api_key)
@@ -17,10 +15,7 @@ def check_openai_api_key(api_key):
         return False
     return True
 
-if os.getenv('OPENAI_API_KEY'):
-    st.session_state.api = os.getenv('OPENAI_API_KEY')
-
-elif 'api' not in st.session_state:
+if 'api' not in st.session_state:
     user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed')
     is_valid = False
     if len(user_input) > 12:
