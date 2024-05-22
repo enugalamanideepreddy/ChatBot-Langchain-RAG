@@ -11,22 +11,25 @@ import os
 
 def check_openai_api_key(api_key):
     try:
-        ChatOpenAI(api_key=api_key)
+        x = ChatOpenAI(api_key=api_key)
+        x.invoke(['hello'])
     except:
         return False
     return True
 
-if os.getenv('OPENAI_API_KEY') is None and 'api' not in st.session_state:
-    user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed',type='password')
-    if len(user_input) > 15:
-        st.session_state.api = user_input
-        st.rerun()
-    is_valid = check_openai_api_key(os.getenv('OPENAI_API_KEY'))
+if os.getenv('OPENAI_API_KEY'):
+    st.session_state.api = os.getenv('OPENAI_API_KEY')
+
+elif 'api' not in st.session_state:
+    user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed')
+    is_valid = False
+    if len(user_input) > 12:
+        is_valid = check_openai_api_key(user_input)
+        if is_valid:
+            st.session_state.api = user_input
+            st.rerun()
     if user_input and not is_valid:
         st.write("Problem with your OpenAI API key.")
-
-else:
-    st.session_state.api = os.getenv('OPENAI_API_KEY')
 
 def load_image(url, size=(300, 200)):
     response = requests.get(url)
