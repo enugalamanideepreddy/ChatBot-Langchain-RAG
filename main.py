@@ -19,7 +19,7 @@ def check_openai_api_key(api_key):
 if os.getenv('OPENAI_API_KEY') is None:
     os.environ['OPENAI_API_KEY'] = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed')
     is_valid = check_openai_api_key(os.getenv('OPENAI_API_KEY'))
-    if not is_valid:
+    if is_valid is False:
         st.write("Problem with your OpenAI API key.")
 
 def load_image(url, size=(300, 200)):
