@@ -30,5 +30,5 @@ To run the Streamlit application, execute the following command in your command 
 
 
 ```bash
-cd <directory>
+cd direcytory_name
 streamlit run main.py
