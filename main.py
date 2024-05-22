@@ -24,7 +24,7 @@ if 'api' not in st.session_state:
             st.session_state.api = user_input
             st.rerun()
     if user_input and not is_valid:
-        st.write("Problem with your OpenAI API key.")
+        st.error("Problem with your OpenAI API key.")
 
 def load_image(url, size=(300, 200)):
     response = requests.get(url)
