@@ -9,6 +9,10 @@ import streamlit as st
 
 from utils import extract_data
 
+if 'api' not in st.session_state:
+	st.error("API key is not set. Please enter your OpenAI API key.")
+	st.stop()
+
 api_key = st.session_state.api
 
 ## Streamlit framework
