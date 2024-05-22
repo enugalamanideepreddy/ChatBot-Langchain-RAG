@@ -1,5 +1,8 @@
 # ChatBot-Langchain-RAG Application
 
+## Working website 
+Link : [Streamlit app](https://rag-chatbot-app.streamlit.app/)
+
 ## Overview
 This project involves developing a versatile chatbot application with two main components: a general chatbot and a Retrieval-Augmented Generation (RAG) chatbot.
 
@@ -32,3 +35,5 @@ To run the Streamlit application, execute the following command in your command 
 ```bash
 cd direcytory_name
 streamlit run main.py
+
+
