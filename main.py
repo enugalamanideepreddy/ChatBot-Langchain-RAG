@@ -19,11 +19,9 @@ def check_openai_api_key(api_key):
 
 if os.getenv('OPENAI_API_KEY') is None:
     os.environ['OPENAI_API_KEY'] = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed')
-
-st.session_state.is_valid = check_openai_api_key(os.getenv('OPENAI_API_KEY'))
-
-if not st.session_state.is_valid:
-    st.write("Problem with your OpenAI API key.")
+    is_valid = check_openai_api_key(os.getenv('OPENAI_API_KEY'))
+    if not is_valid:
+        st.write("Problem with your OpenAI API key.")
 
 def load_image(url, size=(300, 200)):
     response = requests.get(url)
@@ -59,7 +57,7 @@ with col1:
 with col2:
     st.image(rag_image, use_column_width=True)
 
-if st.session_state.is_valid:
+if os.getenv('OPENAI_API_KEY') is None:
     show_pages(
         [
             Page("./main.py", "Home", "🏠"),
