@@ -11,7 +11,7 @@ if 'chain' not in st.session_state:
         ('user','Question : {question}')
     ]
     )
-    st.session_state.chain = prompt | ChatOpenAI() | StrOutputParser()
+    st.session_state.chain = prompt | ChatOpenAI(api_key=st.session_state.api) | StrOutputParser()
 
 if 'user_input' not in st.session_state:
 	st.session_state['user_input'] = []

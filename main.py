@@ -19,11 +19,14 @@ def check_openai_api_key(api_key):
 if os.getenv('OPENAI_API_KEY') is None:
     user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed',type='password')
     if len(user_input) > 10:
-        os.environ['OPENAI_API_KEY'] = user_input
+        st.session_state.api = user_input
         st.rerun()
     is_valid = check_openai_api_key(os.getenv('OPENAI_API_KEY'))
     if user_input and not is_valid:
         st.write("Problem with your OpenAI API key.")
+
+else:
+    st.session_state.api = os.getenv('OPENAI_API_KEY')
 
 def load_image(url, size=(300, 200)):
     response = requests.get(url)

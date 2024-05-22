@@ -23,10 +23,10 @@ if 'rag_openai_response' not in st.session_state:
 def create_vector_store(pdfs):
     splitter = RecursiveCharacterTextSplitter(chunk_size = 500,chunk_overlap = 50)
     docs = extract_data(pdfs,splitter)
-    vector_db = FAISS.from_documents(docs,OpenAIEmbeddings())
+    vector_db = FAISS.from_documents(docs,OpenAIEmbeddings(api_key=st.session_state.api))
 
     prompt = ChatPromptTemplate.from_template("""Answer the following question based only on provided context.<context>{context}</context>/n/nQuestion : {input}""")
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(api_key=st.session_state.api)
     doc_chain = create_stuff_documents_chain(llm,prompt)
 
     retriever = vector_db.as_retriever()
