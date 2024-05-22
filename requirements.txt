@@ -6,4 +6,3 @@ pypdf
 chromadb
 streamlit-chat
 st-pages
-openai
