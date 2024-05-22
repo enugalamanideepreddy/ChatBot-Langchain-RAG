@@ -60,11 +60,10 @@ with col1:
 with col2:
     st.image(rag_image, use_column_width=True)
 
-if 'api' in st.session_state:
-    show_pages(
-        [
-            Page("./main.py", "Home", "🏠"),
-            Page("./chat.py", "General","🎈️"),
-            Page("./rag.py", "RAG", ":books:"),
-        ]
-    )
+show_pages(
+    [
+        Page("./main.py", "Home", "🏠"),
+        Page("./chat.py", "General","🎈️"),
+        Page("./rag.py", "RAG", ":books:"),
+    ]
+)
