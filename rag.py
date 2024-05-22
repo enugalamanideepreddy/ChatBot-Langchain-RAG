@@ -1,4 +1,3 @@
-from langchain_community.llms.ollama import Ollama
 from langchain_openai import ChatOpenAI,OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -7,8 +6,6 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from streamlit_chat import message
 import streamlit as st
-
-RecursiveCharacterTextSplitter()
 
 from utils import extract_data
 
