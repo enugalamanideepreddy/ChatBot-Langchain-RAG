@@ -42,7 +42,7 @@ if st.session_state['user_input']:
 instr = 'Hi there! Enter what you want to let me know here.'
 
 with st.form('chat_input_form'):
-    col1, col2 = st.columns([9,2]) 
+    col1, col2 = st.columns([9,1]) 
     with col1:
         user_input = st.text_input(
             instr,
