@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI,OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from streamlit_chat import message
@@ -23,7 +23,7 @@ if 'rag_openai_response' not in st.session_state:
 def create_vector_store(pdfs):
     splitter = RecursiveCharacterTextSplitter(chunk_size = 500,chunk_overlap = 50)
     docs = extract_data(pdfs,splitter)
-    vector_db = Chroma.from_documents(docs,OpenAIEmbeddings())
+    vector_db = FAISS.from_documents(docs,OpenAIEmbeddings())
 
     prompt = ChatPromptTemplate.from_template("""Answer the following question based only on provided context.<context>{context}</context>/n/nQuestion : {input}""")
     llm = ChatOpenAI()

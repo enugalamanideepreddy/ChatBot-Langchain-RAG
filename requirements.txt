@@ -3,6 +3,6 @@ langchain-openai
 langchain_community
 streamlit
 PyPDF2
-chromadb
+faiss-cpu
 streamlit-chat
 st-pages
