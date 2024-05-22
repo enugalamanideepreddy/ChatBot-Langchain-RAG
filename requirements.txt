@@ -1,0 +1,9 @@
+langchain
+langchain-openai
+streamlit
+langserve
+pypdf
+chromadb
+streamlit-chat
+st-pages
+openai
