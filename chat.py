@@ -4,6 +4,8 @@ from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 
+api_key = st.session_state.api
+
 if 'chain' not in st.session_state:
     prompt = ChatPromptTemplate.from_messages(
     [
@@ -11,7 +13,7 @@ if 'chain' not in st.session_state:
         ('user','Question : {question}')
     ]
     )
-    st.session_state.chain = prompt | ChatOpenAI(api_key=st.session_state.api) | StrOutputParser()
+    st.session_state.chain = prompt | ChatOpenAI(api_key=api_key) | StrOutputParser()
 
 if 'user_input' not in st.session_state:
 	st.session_state['user_input'] = []
