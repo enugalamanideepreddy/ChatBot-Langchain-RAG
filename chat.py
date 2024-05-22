@@ -42,7 +42,7 @@ if st.session_state['user_input']:
 instr = 'Hi there! Enter what you want to let me know here.'
 
 with st.form('chat_input_form'):
-    col1, col2 = st.columns([9,1]) 
+    col1, col2 = st.columns([9,2]) 
     with col1:
         user_input = st.text_input(
             instr,
@@ -50,11 +50,11 @@ with st.form('chat_input_form'):
             label_visibility='collapsed'
         )
     with col2:
-        submit = st.form_submit_button('Chat')
+        submit = st.form_submit_button('🤖')
 
 if user_input and submit:
 	output = st.session_state.chain.invoke({'question':user_input})
-	output = output.lstrip("\n\n")
+	output = output.lstrip("\n")
 
 	# Store the output
 	st.session_state.openai_response.append(user_input)
