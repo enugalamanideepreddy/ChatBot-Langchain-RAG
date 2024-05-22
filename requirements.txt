@@ -1,5 +1,6 @@
 langchain
 langchain-openai
+langchain_community
 streamlit
 langserve
 pypdf
