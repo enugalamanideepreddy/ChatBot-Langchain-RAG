@@ -13,7 +13,6 @@ def check_openai_api_key(api_key):
     try:
         ChatOpenAI(api_key=api_key)
     except:
-        print('hi22ww')
         return False
     return True
 
