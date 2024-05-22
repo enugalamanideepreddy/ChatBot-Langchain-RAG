@@ -62,7 +62,7 @@ with col1:
 with col2:
     st.image(rag_image, use_column_width=True)
 
-if 'api' not in st.session_state:
+if 'api' in st.session_state:
     show_pages(
         [
             Page("./main.py", "Home", "🏠"),
