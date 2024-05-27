@@ -3,6 +3,7 @@ from streamlit_chat import message
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
+import time
 
 if 'api' not in st.session_state:
 	st.error("API key is not set. Please enter your OpenAI API key.")

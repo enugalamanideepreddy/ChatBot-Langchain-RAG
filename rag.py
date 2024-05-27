@@ -5,6 +5,7 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from streamlit_chat import message
+from langchain_core.output_parsers import StrOutputParser
 import streamlit as st
 
 from utils import extract_data
@@ -15,17 +16,6 @@ if 'api' not in st.session_state:
 
 api_key = st.session_state.api
 
-## Streamlit framework
-
-st.title('RAG QnA')
-
-if 'rag_user_input' not in st.session_state:
-	st.session_state['rag_user_input'] = []
-
-if 'rag_openai_response' not in st.session_state:
-	st.session_state['rag_openai_response'] = []
-
-
 def create_vector_store(pdfs):
     splitter = RecursiveCharacterTextSplitter(chunk_size = 500,chunk_overlap = 50)
     docs = extract_data(pdfs,splitter)
@@ -33,22 +23,39 @@ def create_vector_store(pdfs):
 
     prompt = ChatPromptTemplate.from_template("""Answer the following question based only on provided context.<context>{context}</context>/n/nQuestion : {input}""")
     llm = ChatOpenAI(api_key=api_key)
-    doc_chain = create_stuff_documents_chain(llm,prompt)
+    doc_chain = create_stuff_documents_chain(llm,prompt,output_parser=StrOutputParser())
 
     retriever = vector_db.as_retriever()
-    st.session_state.retrieval_chain = create_retrieval_chain(retriever,doc_chain)
+    st.session_state.retrieval_chain = create_retrieval_chain(retriever,doc_chain,)
 
-if st.session_state['rag_user_input']:
-	for i in range(len(st.session_state['rag_user_input'])):
+## Streamlit framework
+
+st.title('RAG QnA')
+
+if "rag_messages" not in st.session_state:
+    st.session_state.rag_messages = []
+
+# if st.session_state['rag_user_input']:
+# 	for i in range(len(st.session_state['rag_user_input'])):
 		
-		# This function displays OpenAI response
-		message(st.session_state['rag_openai_response'][i], 
-				avatar_style="miniavs",is_user=True,
-				key=str(i) + 'data_by_user')
+# 		# This function displays OpenAI response
+# 		message(st.session_state['rag_openai_response'][i], 
+# 				avatar_style="miniavs",is_user=True,
+# 				key=str(i) + 'data_by_user')
 		
-        # This function displays user input
-		message(st.session_state["rag_user_input"][i], 
-				key=str(i)+'data_from_llm',avatar_style="icons")
+#         # This function displays user input
+# 		message(st.session_state["rag_user_input"][i], 
+# 				key=str(i)+'data_from_llm',avatar_style="icons")
+          
+if st.session_state['rag_messages'] and len(st.session_state['rag_messages']) > 0:
+    for i in range(len(st.session_state['rag_messages'])):
+        if st.session_state['rag_messages'][i]['role'] == 'user':
+            message(st.session_state['rag_messages'][i]['content'], 
+                avatar_style="miniavs",is_user=True,
+                key=str(i) + 'data_by_user')
+        else:
+            message(st.session_state['rag_messages'][i]['content'], 
+                    key=str(i),avatar_style="icons")
             
 if 'retrieval_chain' not in st.session_state:
     uploaded_files = st.file_uploader("Choose a file",type=['pdf','txt','csv'],accept_multiple_files=True)
@@ -76,11 +83,10 @@ else:
 
     if user_input and submit:
         output = st.session_state.retrieval_chain.invoke({'input':user_input})['answer']
-        output = output.lstrip("\n\n")
 
         # Store the output
-        st.session_state.rag_openai_response.append(user_input)
-        st.session_state.rag_user_input.append(output)
+        st.session_state.rag_messages.append({"role": "user", "content": user_input})
+        st.session_state.rag_messages.append({"role": "assistant", "content": output})
         st.rerun()
 
 
