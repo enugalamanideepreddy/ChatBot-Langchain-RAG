@@ -7,14 +7,11 @@ from langchain.chains.retrieval import create_retrieval_chain
 from streamlit_chat import message
 from langchain_core.output_parsers import StrOutputParser
 import streamlit as st
-
+from menu import menu
 from utils import extract_data
 
-if 'api' not in st.session_state:
-	st.error("API key is not set. Please enter your OpenAI API key.")
-	st.stop()
-
 api_key = st.session_state.api
+menu()
 
 def create_vector_store(pdfs):
     splitter = RecursiveCharacterTextSplitter(chunk_size = 500,chunk_overlap = 50)

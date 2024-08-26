@@ -1,35 +1,10 @@
-from st_pages import Page, show_pages
+# from st_pages import Page, show_pages
 import streamlit as st
-from langchain_openai import ChatOpenAI
-
-# Define a function to load and resize image from URL
-from PIL import Image
-import requests
-from io import BytesIO
-
-def check_openai_api_key(api_key):
-    try:
-        x = ChatOpenAI(api_key=api_key)
-        x.invoke(['hello'])
-    except:
-        return False
-    return True
+from utils import load_image,login
+from menu import menu
 
 if 'api' not in st.session_state:
-    user_input = st.text_input('Enter Open AI API',placeholder='Enter Open AI API',label_visibility='collapsed')
-    is_valid = False
-    if len(user_input) > 12:
-        is_valid = check_openai_api_key(user_input)
-        if is_valid:
-            st.session_state.api = user_input
-            st.rerun()
-    if user_input and not is_valid:
-        st.error("Problem with your OpenAI API key.")
-
-def load_image(url, size=(300, 200)):
-    response = requests.get(url)
-    img = Image.open(BytesIO(response.content))
-    return img.resize(size)
+    login()
 
 # Image URLs
 general_image_url = "https://t4.ftcdn.net/jpg/05/47/89/79/240_F_547897906_xOyy9X2M0VuInOpsnMOjcirgyoU9T8aJ.jpg"
@@ -43,7 +18,7 @@ rag_image = load_image(rag_image_url, image_size)
 # Set the title of the page
 st.title("Welcome to Our LLM Chatbot Website")
 
-# Introduction section
+# # Introduction section
 st.header("Explore Our Chatbots")
 st.write("""
 Welcome to our chatbot platform. We offer two distinct chatbots:
@@ -60,10 +35,20 @@ with col1:
 with col2:
     st.image(rag_image, use_column_width=True)
 
-show_pages(
-    [
-        Page("./main.py", "Home", "🏠"),
-        Page("./chat.py", "General","🎈️"),
-        Page("./rag.py", "RAG", ":books:"),
-    ]
-)
+menu()
+
+# gen_chat = st.Page('./chat.py',title="QnA with OpenAI", icon = "🎈️")
+# rag_chat = st.Page('./rag.py',title="RAG chatbot", icon = "🎈️")
+
+# pg = st.navigation([gen_chat, rag_chat])
+
+# pg.run()
+
+
+# show_pages(
+#     [
+#         Page("./main.py", "Home", "🏠"),
+#         Page("./chat.py", "General","🎈️"),
+#         Page("./rag.py", "RAG", ":books:"),
+#     ]
+# )

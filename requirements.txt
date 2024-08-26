@@ -6,3 +6,5 @@ PyPDF2
 faiss-cpu
 streamlit-chat
 st-pages
+black
+pylint

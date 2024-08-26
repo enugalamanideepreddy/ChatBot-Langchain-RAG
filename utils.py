@@ -1,7 +1,23 @@
-from PyPDF2 import PdfReader
 from io import BytesIO,StringIO
 from langchain.schema.document import Document
 import pandas as pd
+from langchain_openai import OpenAI
+from PIL import Image
+from PyPDF2 import PdfReader
+import requests
+
+def load_image(url, size=(300, 200)):
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    return img.resize(size)
+
+def check_openai_api_key(api_key):
+    try:
+        x = OpenAI(api_key=api_key)
+        x.invoke(['hello'])
+    except:
+        return False
+    return True
 
 def extract_data(uploaded_files,splitter):
     # List to hold the document objects
@@ -68,4 +84,36 @@ def extract_data(uploaded_files,splitter):
             # Add the document to the list
             documents += doc
     return documents
+
+def login():
+    import streamlit as st
+
+    # Set up the Streamlit app
+    st.title("Login")
+
+    # Create the login form
+    with st.form(key='login_form'):
+        name = st.text_input("Name")
+        api_key = st.text_input("OpenAI API Key")
+        submit_button = st.form_submit_button(label="Login")
+
+
+    # Process the login
+    if submit_button:
+        if name and api_key:
+            if len(api_key) > 12:
+                is_valid = check_openai_api_key(api_key)
+                if is_valid:
+                    st.success(f"Welcome, {name}!")
+                    st.write("Your API Key is securely stored.")
+                    # Here you can use the API key to authenticate with OpenAI
+                    # For example, you can save the API key in session state
+                    st.session_state.api = api_key
+                    st.rerun()
+            else:
+                st.error("Wrong Credentials")
+        else:
+            st.error('Please Enter Name and API key to Enjoy Our ChatBot Services')
+    
+
 
