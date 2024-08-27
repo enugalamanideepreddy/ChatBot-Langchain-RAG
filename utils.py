@@ -6,6 +6,7 @@ from PIL import Image
 from PyPDF2 import PdfReader
 import requests
 from menu import menu
+import openai
 
 
 def load_image(url, size=(300, 200)):
@@ -18,7 +19,7 @@ def check_openai_api_key(api_key):
     try:
         x = OpenAI(api_key=api_key)
         x.invoke(["hello"])
-    except Exception:
+    except [openai.AuthenticationError, openai.APITimeoutError]:
         return False
     return True
 
