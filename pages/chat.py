@@ -5,8 +5,8 @@ from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from menu import menu
 
-api_key = st.session_state.api
 menu()
+api_key = st.session_state.api
 
 if 'chain' not in st.session_state:
     prompt = ChatPromptTemplate.from_messages(

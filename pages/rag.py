@@ -10,8 +10,8 @@ import streamlit as st
 from menu import menu
 from utils import extract_data
 
-api_key = st.session_state.api
 menu()
+api_key = st.session_state.api
 
 def create_vector_store(pdfs):
     splitter = RecursiveCharacterTextSplitter(chunk_size = 500,chunk_overlap = 50)
