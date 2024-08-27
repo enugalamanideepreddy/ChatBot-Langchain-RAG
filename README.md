@@ -1,5 +1,4 @@
-![example event parameter]
-(https://github.com/github/docs/actions/workflows/main.yml/badge.svg?event=push)
+![example event parameter](https://github.com/enugalamanideepreddy/ChatBot-Langchain-RAG/actions/workflows/workflow.yml/badge.svg?event=push)
 
 # ChatBot-Langchain-RAG Application
 
