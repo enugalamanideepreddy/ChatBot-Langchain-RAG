@@ -5,6 +5,8 @@ from langchain_openai import OpenAI
 from PIL import Image
 from PyPDF2 import PdfReader
 import requests
+import time
+from menu import menu
 
 def load_image(url, size=(300, 200)):
     response = requests.get(url)
@@ -109,7 +111,9 @@ def login():
                     # Here you can use the API key to authenticate with OpenAI
                     # For example, you can save the API key in session state
                     st.session_state.api = api_key
-                    st.rerun()
+                    
+                    # Builds Menu 
+                    menu()
             else:
                 st.error("Wrong Credentials")
         else:

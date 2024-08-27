@@ -34,21 +34,3 @@ with col1:
 
 with col2:
     st.image(rag_image, use_column_width=True)
-
-menu()
-
-# gen_chat = st.Page('./chat.py',title="QnA with OpenAI", icon = "🎈️")
-# rag_chat = st.Page('./rag.py',title="RAG chatbot", icon = "🎈️")
-
-# pg = st.navigation([gen_chat, rag_chat])
-
-# pg.run()
-
-
-# show_pages(
-#     [
-#         Page("./main.py", "Home", "🏠"),
-#         Page("./chat.py", "General","🎈️"),
-#         Page("./rag.py", "RAG", ":books:"),
-#     ]
-# )

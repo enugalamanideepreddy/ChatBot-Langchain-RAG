@@ -4,15 +4,10 @@ import streamlit as st
 def authenticated_menu():
     # Show a navigation menu for authenticated users
     if st.session_state.api:
-        st.sidebar.page_link("main.py", label="Home")
-        st.sidebar.page_link("pages/chat.py", label="General Chatbot")
-        st.sidebar.page_link("pages/rag.py", label="RAG Chatbot")
-        # st.sidebar.page_link(
-        #     "pages/super-admin.py",
-        #     label="Manage admin access",
-        #     disabled=st.session_state.role != "super-admin",
-        # )
-
+        st.sidebar.page_link("main.py", label="Home", icon="🏠")
+        st.sidebar.page_link("pages/chat.py", label="General Chatbot", icon=":material/chat:")
+        st.sidebar.page_link("pages/rag.py", label="RAG Chatbot", icon=":material/live_help:")
+        st.sidebar.page_link("pages/logout.py", label="Logout", icon=":material/logout:")
 
 # def unauthenticated_menu():
 #     # Show a navigation menu for unauthenticated users

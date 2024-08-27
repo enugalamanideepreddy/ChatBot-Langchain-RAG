@@ -12,7 +12,10 @@ from utils import extract_data
 
 if 'api' not in st.session_state:
     st.switch_page("main.py")
+
+# Builds Menu 
 menu()
+
 api_key = st.session_state.api
 
 def create_vector_store(pdfs):

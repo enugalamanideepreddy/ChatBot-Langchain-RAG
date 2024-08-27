@@ -7,7 +7,10 @@ from menu import menu
 
 if 'api' not in st.session_state:
     st.switch_page("main.py")
+
+# Builds Menu 
 menu()
+
 api_key = st.session_state.api
 
 if 'chain' not in st.session_state:
