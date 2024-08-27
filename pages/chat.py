@@ -5,9 +5,9 @@ from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from menu import menu
 
-menu()
 if 'api' not in st.session_state:
-    st.stop()
+    st.switch_page("main.py")
+menu()
 api_key = st.session_state.api
 
 if 'chain' not in st.session_state:

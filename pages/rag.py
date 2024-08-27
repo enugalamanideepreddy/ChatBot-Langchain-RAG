@@ -10,9 +10,9 @@ import streamlit as st
 from menu import menu
 from utils import extract_data
 
-menu()
 if 'api' not in st.session_state:
-    st.stop()
+    st.switch_page("main.py")
+menu()
 api_key = st.session_state.api
 
 def create_vector_store(pdfs):
