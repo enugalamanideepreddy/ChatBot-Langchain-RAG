@@ -8,7 +8,6 @@ import requests
 from menu import menu
 import openai
 
-
 def load_image(url, size=(300, 200)):
     response = requests.get(url, timeout=10)
     img = Image.open(BytesIO(response.content))
@@ -19,7 +18,7 @@ def check_openai_api_key(api_key):
     try:
         x = OpenAI(api_key=api_key)
         x.invoke(["hello"])
-    except [openai.AuthenticationError, openai.APITimeoutError]:
+    except [openai.AuthenticationError, openai.APITimeoutError, openai.RateLimitError, openai.BadRequestError ]:
         return False
     return True
 
