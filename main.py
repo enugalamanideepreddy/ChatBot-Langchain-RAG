@@ -1,9 +1,8 @@
 # from st_pages import Page, show_pages
 import streamlit as st
-from utils import load_image,login
-from menu import menu
+from utils import load_image, login
 
-if 'api' not in st.session_state:
+if "api" not in st.session_state:
     login()
 
 # Image URLs
@@ -20,11 +19,13 @@ st.title("Welcome to Our LLM Chatbot Website")
 
 # # Introduction section
 st.header("Explore Our Chatbots")
-st.write("""
+st.write(
+    """
 Welcome to our chatbot platform. We offer two distinct chatbots:
 - **General Chatbot**: A helpful assistant that responds to a wide range of general queries.
 - **RAG Chatbot**: A specialized chatbot that leverages Retrieval-Augmented Generation for more accurate responses based on your decouments.
-""")
+"""
+)
 
 # Display images and create buttons to navigate to different chatbots
 col1, col2 = st.columns(2)
