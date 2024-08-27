@@ -1,8 +1,8 @@
 from streamlit.testing.v1 import AppTest
 
-
+# Currently Not Working
 def test_AppRunning():
-    """A user increments the number input, then clicks Add"""
+    """Writing Test Function. """
     at = AppTest.from_file("main.py").run()
     at.text_input[0].set_value("Testing").run()
     at.text_input[1].set_value("wrong_api").run()
