@@ -6,6 +6,8 @@ from langchain_core.output_parsers import StrOutputParser
 from menu import menu
 
 menu()
+if 'api' not in st.session_state:
+    st.stop()
 api_key = st.session_state.api
 
 if 'chain' not in st.session_state:
