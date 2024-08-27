@@ -9,7 +9,7 @@ from menu import menu
 
 
 def load_image(url, size=(300, 200)):
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     img = Image.open(BytesIO(response.content))
     return img.resize(size)
 
