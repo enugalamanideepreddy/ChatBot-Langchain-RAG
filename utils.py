@@ -18,7 +18,7 @@ def check_openai_api_key(api_key):
     try:
         x = OpenAI(api_key=api_key)
         x.invoke(["hello"])
-    except:
+    except Exception:
         return False
     return True
 
